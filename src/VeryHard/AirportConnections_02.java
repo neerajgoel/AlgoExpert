@@ -3,7 +3,7 @@ package VeryHard;
 import java.util.*;
 
 /**
- * O( 2^(V) * (V+E) ) time
+ * O( 2^(V) * (V+E) ) time - worst case
  * This solution is better than AirportConnections_01 solution
  */
 public class AirportConnections_02 {
@@ -99,48 +99,49 @@ public class AirportConnections_02 {
 
     public static void main(String[] args) {
         System.out.println("*** started ***");
-        List<String> AIRPORTS =
-                new ArrayList<String>(
-                        Arrays.asList(
-                                "BGI", "CDG", "DEL", "DOH", "DSM", "EWR", "EYW", "HND", "ICN", "JFK", "LGA", "LHR",
-                                "ORD", "SAN", "SFO", "SIN", "TLV", "BUD"));
-
-        String STARTING_AIRPORT = "LGA";
-
-        List<List<String>> routes = new ArrayList<List<String>>();
-        routes.add(new ArrayList<String>(Arrays.asList("DSM", "ORD")));
-        routes.add(new ArrayList<String>(Arrays.asList("ORD", "BGI")));
-        routes.add(new ArrayList<String>(Arrays.asList("BGI", "LGA")));
-        routes.add(new ArrayList<String>(Arrays.asList("SIN", "CDG")));
-        routes.add(new ArrayList<String>(Arrays.asList("CDG", "SIN")));
-        routes.add(new ArrayList<String>(Arrays.asList("CDG", "BUD")));
-        routes.add(new ArrayList<String>(Arrays.asList("DEL", "DOH")));
-        routes.add(new ArrayList<String>(Arrays.asList("DEL", "CDG")));
-        routes.add(new ArrayList<String>(Arrays.asList("TLV", "DEL")));
-        routes.add(new ArrayList<String>(Arrays.asList("EWR", "HND")));
-        routes.add(new ArrayList<String>(Arrays.asList("HND", "ICN")));
-        routes.add(new ArrayList<String>(Arrays.asList("HND", "JFK")));
-        routes.add(new ArrayList<String>(Arrays.asList("ICN", "JFK")));
-        routes.add(new ArrayList<String>(Arrays.asList("JFK", "LGA")));
-        routes.add(new ArrayList<String>(Arrays.asList("EYW", "LHR")));
-        routes.add(new ArrayList<String>(Arrays.asList("LHR", "SFO")));
-        routes.add(new ArrayList<String>(Arrays.asList("SFO", "SAN")));
-        routes.add(new ArrayList<String>(Arrays.asList("SFO", "DSM")));
-        routes.add(new ArrayList<String>(Arrays.asList("SAN", "EYW")));
-
 //        List<String> AIRPORTS =
 //                new ArrayList<String>(
 //                        Arrays.asList(
-////                                "A",
-//                                "B", "C", "D", "E"));
+//                                "BGI", "CDG", "DEL", "DOH", "DSM", "EWR", "EYW", "HND", "ICN", "JFK", "LGA", "LHR",
+//                                "ORD", "SAN", "SFO", "SIN", "TLV", "BUD"));
 //
-//        String STARTING_AIRPORT = "C";
+//        String STARTING_AIRPORT = "LGA";
 //
 //        List<List<String>> routes = new ArrayList<List<String>>();
-//        routes.add(new ArrayList<String>(Arrays.asList("B", "C")));
-//        routes.add(new ArrayList<String>(Arrays.asList("C", "D")));
-//        routes.add(new ArrayList<String>(Arrays.asList("D", "E")));
-//        routes.add(new ArrayList<String>(Arrays.asList("E", "D")));
+//        routes.add(new ArrayList<String>(Arrays.asList("DSM", "ORD")));
+//        routes.add(new ArrayList<String>(Arrays.asList("ORD", "BGI")));
+//        routes.add(new ArrayList<String>(Arrays.asList("BGI", "LGA")));
+//        routes.add(new ArrayList<String>(Arrays.asList("SIN", "CDG")));
+//        routes.add(new ArrayList<String>(Arrays.asList("CDG", "SIN")));
+//        routes.add(new ArrayList<String>(Arrays.asList("CDG", "BUD")));
+//        routes.add(new ArrayList<String>(Arrays.asList("DEL", "DOH")));
+//        routes.add(new ArrayList<String>(Arrays.asList("DEL", "CDG")));
+//        routes.add(new ArrayList<String>(Arrays.asList("TLV", "DEL")));
+//        routes.add(new ArrayList<String>(Arrays.asList("EWR", "HND")));
+//        routes.add(new ArrayList<String>(Arrays.asList("HND", "ICN")));
+//        routes.add(new ArrayList<String>(Arrays.asList("HND", "JFK")));
+//        routes.add(new ArrayList<String>(Arrays.asList("ICN", "JFK")));
+//        routes.add(new ArrayList<String>(Arrays.asList("JFK", "LGA")));
+//        routes.add(new ArrayList<String>(Arrays.asList("EYW", "LHR")));
+//        routes.add(new ArrayList<String>(Arrays.asList("LHR", "SFO")));
+//        routes.add(new ArrayList<String>(Arrays.asList("SFO", "SAN")));
+//        routes.add(new ArrayList<String>(Arrays.asList("SFO", "DSM")));
+//        routes.add(new ArrayList<String>(Arrays.asList("SAN", "EYW")));
+
+        List<String> AIRPORTS =
+                new ArrayList<String>(
+                        Arrays.asList(
+                                "A",
+                                "B", "C", "D", "E"));
+
+        String STARTING_AIRPORT = "C";
+
+        List<List<String>> routes = new ArrayList<List<String>>();
+        routes.add(new ArrayList<String>(Arrays.asList("B", "C")));
+        routes.add(new ArrayList<String>(Arrays.asList("C", "D")));
+        routes.add(new ArrayList<String>(Arrays.asList("D", "E")));
+        routes.add(new ArrayList<String>(Arrays.asList("E", "D")));
+        routes.add(new ArrayList<String>(Arrays.asList("A", "B")));
 
 
 
