@@ -3,10 +3,10 @@ package VeryHard;
 import java.util.*;
 
 /**
- * O( 2^(V^2) * (V+E) ) time
- * This solution takes lot of time and will take infinite amount of time to run :(
+ * O( 2^(V) * (V+E) ) time
+ * This solution is better than AirportConnections_01 solution
  */
-public class AirportConnections_01 {
+public class AirportConnections_02 {
 
     static int lookup(String airport, HashMap<String, Integer> airportSet){
         return airportSet.get(airport);
@@ -17,9 +17,9 @@ public class AirportConnections_01 {
     }
 
     static boolean checkIfAllAirportsAreRecheable_BFS(boolean adjMat[][],
-                                                  int airportsSize,
-                                                  String startingAirport,
-                                                  HashMap<String, Integer> airportSet){
+                                                      int airportsSize,
+                                                      String startingAirport,
+                                                      HashMap<String, Integer> airportSet){
         color colors[] = new color[airportsSize];
         int distance[] = new int[airportsSize];
         for(int i=0 ; i<airportsSize ; i++){
@@ -50,31 +50,26 @@ public class AirportConnections_01 {
         return true;
     }
 
-    static void check(boolean adjMat[][], int airportSize, int i, int j,
+    static int result = Integer.MAX_VALUE;
+
+    static void check(boolean adjMat[][], int airportSize, int j,
                       String startingAirport,
                       HashMap<String, Integer> airportSet,
-                      Integer result, int currentChanges){
-        if( i >= airportSize || j >= airportSize ){
+                      int currentChanges){
+        if( j >= airportSize ){
             boolean res = checkIfAllAirportsAreRecheable_BFS(adjMat, airportSize, startingAirport, airportSet);
             if( res && currentChanges < result ){
                 result = currentChanges;
             }
             return;
         }
-        int r,c;
-        if( j < airportSize - 1 ){
-            r = i;
-            c = j + 1;
-        }
-        else{
-            r = i + 1;
-            c = 0;
-        }
-        boolean origState = adjMat[i][j];
-        check(adjMat, airportSize, r, c, startingAirport, airportSet, result, currentChanges );
-        adjMat[i][j] = !origState;
-        check(adjMat, airportSize, r, c, startingAirport, airportSet, result, currentChanges + 1 );
-        adjMat[i][j] = origState;
+        int i = lookup(startingAirport, airportSet);
+        check(adjMat, airportSize, j+1, startingAirport, airportSet, currentChanges );
+        if( adjMat[i][j] )
+            return;
+        adjMat[i][j] = true;
+        check(adjMat, airportSize, j+1, startingAirport, airportSet, currentChanges + 1);
+        adjMat[i][j] = false;
     }
 
     public static int airportConnections(
@@ -98,8 +93,7 @@ public class AirportConnections_01 {
 
         // run BFS
 
-        Integer result = new Integer(Integer.MAX_VALUE);
-        check(adjMat, airports.size(),0, 0, startingAirport, airportSet, result, 0 );
+        check(adjMat, airports.size(),0, startingAirport, airportSet, 0 );
         return result;
     }
 
@@ -133,6 +127,21 @@ public class AirportConnections_01 {
         routes.add(new ArrayList<String>(Arrays.asList("SFO", "SAN")));
         routes.add(new ArrayList<String>(Arrays.asList("SFO", "DSM")));
         routes.add(new ArrayList<String>(Arrays.asList("SAN", "EYW")));
+
+//        List<String> AIRPORTS =
+//                new ArrayList<String>(
+//                        Arrays.asList(
+////                                "A",
+//                                "B", "C", "D", "E"));
+//
+//        String STARTING_AIRPORT = "C";
+//
+//        List<List<String>> routes = new ArrayList<List<String>>();
+//        routes.add(new ArrayList<String>(Arrays.asList("B", "C")));
+//        routes.add(new ArrayList<String>(Arrays.asList("C", "D")));
+//        routes.add(new ArrayList<String>(Arrays.asList("D", "E")));
+//        routes.add(new ArrayList<String>(Arrays.asList("E", "D")));
+
 
 
         int res = airportConnections(AIRPORTS, routes, STARTING_AIRPORT);
