@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * O( 2^(V^2) * (V+E) ) time
- * This solution takes lot of time.
+ * This solution takes lot of time and will take infinite amount of time to run
  */
 public class AirportConnections_01 {
 
