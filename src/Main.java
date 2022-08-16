@@ -1,9 +1,9 @@
-import VeryHard.AirportConnections;
+import VeryHard.AirportConnections_01;
 
 public class Main {
 
     public static void main(String[] args) {
-        AirportConnections.main(null);
+        AirportConnections_01.main(null);
     }
 
 }
