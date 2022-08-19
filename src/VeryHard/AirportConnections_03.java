@@ -98,6 +98,28 @@ public class AirportConnections_03 {
         }
     }
 
+    private static ArrayList<Grp> getNonVisitedAirportList(Set<Integer> nonVisitedSet,
+                                                           List<String> airports){
+        // run DFS for all non-recheable airports
+        ArrayList<Grp> nonVisitedAirportList = new ArrayList<>();
+        for(int i = 0; i< distance.length ; i++){
+            if( nonVisitedSet.contains(i) ){
+                initColor(airports);
+                dfsToCountRecheableAirports(i, nonVisitedSet);
+                // count black colors
+                List<Integer> reachables = new ArrayList<>();
+                for(int j = 0; j< color.length ; j++){
+                    if( color[j] == black ){
+                        reachables.add(j);
+                    }
+                }
+                nonVisitedAirportList.add( new Grp(i, reachables.size(), reachables) );
+            }
+        }
+        Collections.sort(nonVisitedAirportList, new Grp());
+        return nonVisitedAirportList;
+    }
+
     public static int airportConnections(
             List<String> airports, List<List<String>> routes, String startingAirport) {
         init(airports, routes);
@@ -109,34 +131,33 @@ public class AirportConnections_03 {
             if( distance[i] == Integer.MAX_VALUE )
                 nonVisitedSet.add(i);
         }
+        ArrayList<Grp> nonVisitedAirportList = getNonVisitedAirportList(nonVisitedSet, airports);
+
         int result = 0;
-        ArrayList<Grp> nonVisitedAirportList = new ArrayList<>();
-        do{
-            nonVisitedAirportList.clear();
-            for(int i = 0; i< distance.length ; i++){
-                if( nonVisitedSet.contains(i) ){
-                    initColor(airports);
-                    dfsToCountRecheableAirports(i, nonVisitedSet);
-                    // count black colors
-                    List<Integer> reachables = new ArrayList<>();
-                    for(int j = 0; j< color.length ; j++){
-                        if( color[j] == black ){
-                            reachables.add(j);
-                        }
-                    }
-                    nonVisitedAirportList.add( new Grp(i, reachables.size(), reachables) );
-                }
-            }
-            Collections.sort(nonVisitedAirportList, new Grp());
-            if(nonVisitedAirportList.isEmpty())
-                break;
+        while( !nonVisitedAirportList.isEmpty() ){
             Grp gp = nonVisitedAirportList.remove(0);
             // add route
             result++;
+            // delete all recheable airports
             for(int r : gp.reacheableAirports){
-                nonVisitedSet.remove(r);
+                for(int i=0 ; i<nonVisitedAirportList.size() ; i++){
+                    Grp g = nonVisitedAirportList.get(i);
+                    if( g.airport == r ){
+                        // remove airport from list
+                        nonVisitedAirportList.remove(i);
+                        break;
+                    }
+                }
             }
-        }while( !nonVisitedAirportList.isEmpty() );
+            for(int i=0 ; i<nonVisitedAirportList.size() ; i++){
+                Grp g = nonVisitedAirportList.get(i);
+                if( g.airport == gp.airport ){
+                    // remove airport from list
+                    nonVisitedAirportList.remove(i);
+                    break;
+                }
+            }
+        }
         return result;
     }
 
