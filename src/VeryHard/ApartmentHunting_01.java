@@ -94,4 +94,8 @@ public class ApartmentHunting_01 {
         System.out.println("Result : " + res);
         return res;
     }
+
+    public static void main(String[] args) {
+
+    }
 }
