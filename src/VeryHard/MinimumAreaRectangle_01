@@ -4,7 +4,7 @@ import java.util.*;
  O(n^2) - Runtime Complexity
  O(n) - Spacetime Complexity
 */
-class Program {
+class MinimumAreaRectangle_01 {
 
   class Point{
     int x;
