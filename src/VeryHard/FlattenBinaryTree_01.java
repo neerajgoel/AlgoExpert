@@ -1,8 +1,8 @@
 package VeryHard;
 
-import java.util.*;
-
-// O(n^2) - space complexity
+/**
+ * O(n^2) - RunTime complexity
+ */
 class FlattenBinaryTree_01 {
 
   static BinaryTree leftMost(BinaryTree root){
