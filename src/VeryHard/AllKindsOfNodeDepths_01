@@ -1,0 +1,66 @@
+import java.util.*;
+
+class AllKindsOfNodeDepths_01 {
+
+  static class Group{
+    int depth;
+    int count;
+    Group(int dep, int co){
+      this.depth = dep;
+      this.count = co;
+    }
+  }
+
+  static class Result{
+    int result;
+    Result(){
+      result = 0 ;
+    }
+  }
+  
+  private static Group process(BinaryTree root, Result result){
+    if( root == null ){
+      return new Group(0, 0);
+    }
+    Group leftGp = process(root.left, result);
+    int leftDepth = (leftGp.depth + leftGp.count);
+    int leftCount = leftGp.count;
+    
+    Group rightGp = process(root.right, result);
+    int rightDepth = (rightGp.depth + rightGp.count);
+    int rightCount = rightGp.count;
+
+    int depth = leftDepth + rightDepth;
+    if( root.left != null ){
+      depth++;
+      leftCount++;
+    }
+    if( root.right != null ){
+      depth++;
+      rightCount++;
+    }
+    System.out.println("Depth of " + root.value + " : " + depth);
+    result.result += depth;
+    return new Group(depth, leftCount + rightCount);
+  }
+  
+  public static int allKindsOfNodeDepths(BinaryTree root) {
+    Result result = new Result();
+    Group gp = process(root, result);
+    System.out.println("root depth : " + gp.depth);
+    System.out.println("totalDepth : " + result.result);
+    return result.result;
+  }
+
+  static class BinaryTree {
+    int value;
+    BinaryTree left;
+    BinaryTree right;
+
+    public BinaryTree(int value) {
+      this.value = value;
+      left = null;
+      right = null;
+    }
+  }
+}
